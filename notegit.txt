@@ -1,0 +1,9 @@
+不克隆git上的文件，如何上传文件:
+1、在当前目录执行git init;
+2、执行ssh-keygen -t rsa -C "swordsmanye@gmail.com";
+3、打开用户目录下.ssh目录中的id_ras.pub文件，拷贝内容到github主页设置项内的ras配置中;
+4、git add *.c;
+5、git commit -m "first commit";
+6、创建分支:git branch 2018;
+7、git remote add origin git@xx.xx.xx.xx:repos/xxx/xxx/xxx.git
+8、git push -u origin 2018;
