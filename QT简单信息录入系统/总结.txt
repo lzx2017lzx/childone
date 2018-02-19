@@ -1,0 +1,43 @@
+ // //将信息读入到文件中
+    // QFile file("Student.txt");
+    // file.open(QFile::WriteOnly);
+    //  QDataStream da(&file);//用序列化读数据
+
+    // Student st;//定义用来写文件的对象；用了匿名对象就不必用本对象
+    // QVector<Student>v;//先将所有读入的student对象存入QVector容器中，等容器size大小足够大以后
+    //再读入磁盘，为的是减少磁盘读写次数。
+    //  v.resize(20);
+    //处理录入按钮，按下调试打印所有信息,
+    /*
+    connect(button1,&QPushButton::clicked,[&]()
+    {
+        QString name=edit1->text();
+        QString age=edit2->text();
+        int intage=age.toInt();//QStirng必须转换成string函数，再转换成int类型，才能被Student类对象中的int型数据接收
+        QString score=edit3->text();
+        int intscore=score.toInt();
+        qDebug() << name << intage << intscore;
+        Student s1(name,intage,intscore);
+        qDebug()<<s1.name<<s1.age<<s1.score;
+        // QVector<Student>v;
+        //v.push_back(s1);
+        //        if(v.size()>20)
+        //        {
+        //  for(auto it=v.begin();it!=v.end();it++)
+        //   {
+        QFile file("Student.txt");
+        file.open(QFile::WriteOnly);
+        QDataStream da(&file);//用序列化读数据
+        da<<s1.name<<s1.age<<s1.score;
+        //  }
+        //v.clear();//输入磁盘以后清理容器对象v的数据
+        qDebug()<<"write success!";
+        file.close();
+
+        // }
+
+    }
+    );
+
+    lamda表达式不能传递datastream的变量，本程序在connect函数外面定义datastream变量ds；但是在connect里面并没有运行通过
+*/

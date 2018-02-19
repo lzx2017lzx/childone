@@ -1,0 +1,69 @@
+﻿#ifndef BOARD_H
+#define BOARD_H
+
+#include <QtWidgets/QWidget>
+
+#include"stone.h"
+struct Step
+{
+    int moveid;
+    int killid;
+    int rowFrom;
+    int colFrom;
+    int rowTo;
+    int colTo;
+};
+
+class Board : public QWidget
+{
+    Q_OBJECT
+public:
+    explicit Board(QWidget *parent = 0);
+
+    void init();
+    void save(QString filename);
+    void load(QString filename);
+    void backOne();
+
+
+    void paintEvent(QPaintEvent *ev);//4通过实践绘制棋盘，update()更新也会触发该事件
+    void drawPlate(QPainter &p);
+    void drawCross(QPainter &p,int row,int col);
+
+    void mousePressEvent(QMouseEvent *ev);
+    int getStoneId(int row,int col);
+
+    //选择棋子
+    void selectStone(int select);
+    //移动棋子
+    void moveStone(int select,int kill,int row,int col);
+
+
+    bool canMove(int select,int kill,int row,int col);
+    //用false过滤掉所有不能走的情况，剩余情况不用程序描述直接return true
+    bool canMoveJiang(int select,int kill,int row,int col);
+    bool canMoveShi(int select,int kill,int row,int col);
+    bool canMoveXiang(int select,int kill,int row,int col);
+    bool canMoveChe(int select,int kill,int row,int col);
+    bool canMoveMa(int select,int kill,int row,int col);
+    bool canMovePao(int select,int kill,int row,int col);
+    bool canMoveBing(int select,int kill,int row,int col);
+
+    int getStoneCount(int row1,int col1,int row2,int col2);//如果两个点在一条线，返回两点间棋子个数，否则返回-1
+
+    int selectId;
+    bool redTurn;//设置默认谁先走
+    int &d;
+    Stone s[32];//32个棋子
+     QList<Step*>steps;
+     void addStep(int select,int kill,int row,int col);
+     void clearSteps();
+
+
+
+signals:
+
+public slots:
+};
+
+#endif // BOARD_H

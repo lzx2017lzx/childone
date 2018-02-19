@@ -1,0 +1,27 @@
+1.使用模板实现冒泡排序
+
+2.使用文件IO读取a.txt文件中的信息，构建Person对象，
+  使用选择排序按年龄从小到大排序，
+  将排序后的结果重新写入到文件中（写入方式不限），禁止向文件中写入string类型
+
+3.STL：用两个栈实现一个队列
+
+class Queue
+{
+private:
+	stack<int> s1;
+	stack<int> s2;
+public:
+	//入队
+	void Push(const int& val);
+	//出队
+	void Pop();
+	//返回队首元素
+	int& Front();
+	//返回队尾元素
+	int& Back();
+	//判断队列是否为空
+	bool Empty();
+	//返回队列大小
+	int Size();
+};

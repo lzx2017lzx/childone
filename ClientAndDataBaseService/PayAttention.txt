@@ -1,0 +1,11 @@
+1../client.out zhangsan 123456
+2.list
+3.upload ./test.cpp /zhangsan/test.txt
+4.download /zhangsan/test.txt ./test.cpp
+
+
+among them,/zhangsan/test.txt means a symbol that is wroten in Database system.
+and ./test.cpp has a local meaning.
+
+
+The DataBaseServer is mysql,not mongodb
