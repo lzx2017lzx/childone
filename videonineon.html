@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head> 
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+        <title>video</title> 
+        <style>
+            body{
+                text-align:center
+            }
+            *{
+                margin:auto;
+                padding:0;
+                background:black;
+            }
+            video::-internal-media-controls-download-button {
+                    display:none;
+            }
+            video::-webkit-media-controls-enclosure {
+                    overflow:hidden;
+            }
+            video::-webkit-media-controls-panel {
+                    width: calc(100% + 30px); 
+            }
+            div{
+                    width:800px;
+                    height:800px;
+                    vertical-align: middle;  
+                    margin:200px auto;
+            }
+        </style>
+    </head>
+    <body>
+        <div align="middle">
+        <video width="500" height="300" controls autoplay style="margin:0 auto;">
+            <source src="movie.ogg" type="video/ogg">
+            <source src="37305.mp4" type="video/mp4">
+            <source src="movie.webm" type="video/webm">
+            <object data="37305.mp4" width="320" height="240">
+                <embed width="320" height="240" src="movie.swf">
+            </object>
+        </video>
+        </div>
+    </body>
+</html>
