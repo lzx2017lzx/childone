@@ -4,47 +4,45 @@
 #include<cstring>
 #include<cstdlib>
 #include<unistd.h>
+#include<vector>
 using namespace std;
 void  handleLine(const char * src,char * dst,const char *tgt,const char *cgd);
 
+vector<string>filestring;
+
 int main(int argc, char *argv[])
 {
-    if(argc!=3)
+    if(argc!=4)
     {
-        cout<<"USAGE:EXE SRC DST"<<endl;
+        cout<<"USAGE:EXEFILE SRCFILENAME SRCSTRING DSTSTRING"<<endl;
         return -1;
     }
-    fstream OpenFile("onefiledes.txt",ios::in | ios::out);
+    fstream OpenFile(argv[1],ios::in | ios::out);
     
     char src[1024];  
     char dst[1024];
-    int i=0;
 
-    OpenFile.seekg(0);
-    bool flag=false;
     while(!OpenFile.eof()){
-    i=OpenFile.tellg();
 
     src[0]='\0';
     dst[0]='\0';
-    OpenFile.getline(src,80);
-    OpenFile.seekg(i);
-    handleLine(src,dst,argv[1],argv[2]);
+    OpenFile.getline(src,1024);
+    handleLine(src,dst,argv[2],argv[3]);
     strcat(dst,"\n");
-    OpenFile<<dst;
-    if(i==-1)
-    {
-    cout<<"OpenFile:"<<OpenFile.rdstate()<<endl;
-    cout<<"ios::godbit:"<<(int)ios::goodbit<<endl;
-    cout<<"ios::eofbit:"<<(int)ios::eofbit<<endl;
-    cout<<"ios::failbit:"<<(int)ios::failbit<<endl;
-    cout<<"ios::badbit:"<<(int)ios::badbit<<endl;
-
-    break;
-    }
+    filestring.push_back(string(dst));
     }  
+
+
     OpenFile.close();
 
+    fstream WriteOpenFile(argv[1],ios::out | ios::trunc);
+    for(vector<string>::iterator it=filestring.begin();it!=filestring.end();++it)
+    {
+        WriteOpenFile<<(*it);    
+        cout<<"*it:"<<(*it);
+    }
+
+    WriteOpenFile.close();
     return 0;
 }
 
