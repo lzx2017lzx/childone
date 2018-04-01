@@ -27,8 +27,8 @@ int main(int argc, char *argv[])
 
         src[0]='\0';
         dst[0]='\0';
-//        memset(src,0,1024);
-//        memset(dst,0,1024);
+        //        memset(src,0,1024);
+        //        memset(dst,0,1024);
         OpenFile.getline(src,1024);
         std::cout<<"src:"<<string(src)<<std::endl;
         handleLine(src,dst,status);
@@ -50,17 +50,18 @@ int main(int argc, char *argv[])
 }
 
 // status==true,in notation state
-void  handleLine(const char * src,char * dst,bool &status)
+void  handleLine(const char * src,char * origindst,bool &status)
 {
     char * startptr=const_cast<char*>(src);
-    char * ptrone=NULL;
+    char * dst=origindst;
     char c=0;
+    bool blocknotation=false;
     while(c=*startptr)
     {
         if((!status)&&((c!='/')||((c=='/')&&(*(startptr+1)!='*'))))
         {
             *dst++=*startptr++;    
-            printf("*dst:%c\n",*(dst-1));
+            //printf("*dst:%c\n",*(dst-1));
         }
         else if(!status)
         {
@@ -74,6 +75,25 @@ void  handleLine(const char * src,char * dst,bool &status)
             status=false;// means end of notation
             startptr++;
             startptr++; // jump * and /
+            blocknotation=true;
+        }
+    }
+
+    // judget horizon notation
+    startptr=const_cast<char*>(src);
+    if(!blocknotation)
+    {
+        dst=origindst;
+        while(c=*startptr)
+        {
+            if((c!='/')||((c=='/')&&(*(startptr+1)!='/')))
+            {
+                *dst++=*startptr++;    
+            }
+            else
+            {
+                break;
+            }
         }
     }
     *dst='\0';
