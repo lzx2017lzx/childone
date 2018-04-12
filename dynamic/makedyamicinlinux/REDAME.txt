@@ -1,0 +1,3 @@
+hared -fpic -o libmain.so main.cpp
+g++ common.cpp -L. -lmain
+export LD_LIBRARY_PATH=.
